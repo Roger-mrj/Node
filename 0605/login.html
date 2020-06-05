@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>水系展示与应用软件 | 登录</title>
+    <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+    <meta name="author" content="Vincent Garreau" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="${basePath}/resources/common/images/title.ico">
+    <link rel="stylesheet" media="screen" href="${basePath}/resources/adminlte/plugins/loginJquery/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${basePath}/resources/adminlte/plugins/loginJquery/css/reset.css"/>
+
+
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="${basePath}/resources/common/libs/ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/square/red.css">
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+    <script src="${basePath}/resources/common/libs/html5shiv/html5shiv.min.js"></script>
+    <script src="${basePath}/resources/common/libs/respond/respond.min.js"></script>
+
+    <style>
+        html,body { overflow-x: hidden; overflow-y: hidden; }
+        .login-box-body{
+            position: absolute;
+            width: 350px;
+            height: 265px;
+            margin: 41%;
+            margin-top: 12%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="particles-js" style="position: relative">
+
+    <div class="login-box-body">
+        <!--<p class="login-box-msg">系统登录</p>-->
+        <p class="login-box-msg">水系展示与应用系统</p>
+        <form action="${basePath}/login" method="post" id="login-form">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control"  name="userName" placeholder="请输入登录名">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" name="rememberMe"> 记住用户
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-danger btn-block btn-flat">登 录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="sk-rotating-plane"></div>
+</div>
+
+<!-- scripts -->
+<script src="${basePath}/resources/adminlte/plugins/loginJquery/js/particles.min.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/loginJquery/js/app.js"></script>
+<!--<script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>-->
+<!-- jQuery 2.2.3 -->
+<script src="${basePath}/resources/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${basePath}/resources/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="${basePath}/resources/adminlte/plugins/iCheck/icheck.min.js"></script>
+<!-- bootstrap-validator-->
+<script src="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
+<!--login.js-->
+<script src="${basePath}/resources/common/js/login.js"></script>
+
+<script type="text/javascript">
+
+
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-red',
+            radioClass: 'iradio_square-red',
+            increaseArea: '20%' // optional
+        });
+
+        fillbackLoginForm();
+        $("#login-form").bootstrapValidator({
+            message:'请输入用户名/密码',
+            submitHandler:function (valiadtor,loginForm,submitButton) {
+                rememberMe($("input[name='rememberMe']").is(":checked"));
+                valiadtor.defaultSubmit();
+            },
+            fields:{
+                userName:{
+                    validators:{
+                        notEmpty:{
+                            message:'登录邮箱名或用户名不能为空'
+                        }
+                    }
+                },
+                password:{
+                    validators:{
+                        notEmpty:{
+                            message:'密码不能为空'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    <#if message??>
+    new LoginValidator({
+        code:"${message.code?default('-1')}",
+        message:"${message.message?default('')}",
+        userName:'userName',
+        password:'password'
+    });
+    </#if>
+
+
+    //使用本地缓存记住用户名密码
+    function rememberMe(rm_flag){
+        //remember me
+        if(rm_flag){
+            localStorage.userName=$("input[name='userName']").val();
+            localStorage.password=$("input[name='password']").val();
+            localStorage.rememberMe=1;
+        }
+        //delete remember msg
+        else{
+            localStorage.userName=null;
+            localStorage.password=null;
+            localStorage.rememberMe=0;
+        }
+    }
+
+    //记住回填
+    function fillbackLoginForm(){
+        if(localStorage.rememberMe&&localStorage.rememberMe=="1"){
+            $("input[name='userName']").val(localStorage.userName);
+            $("input[name='password']").val(localStorage.password);
+            $("input[name='rememberMe']").iCheck('check');
+            $("input[name='rememberMe']").iCheck('update');
+        }
+    }
+
+
+</script>
+</body>
+</html>

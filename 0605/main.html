@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>吉林省水系展示与应用系统</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" href="${basePath}/resources/common/images/title.ico">
+  <!--  -->
+  <!-- <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico" media="screen"> -->
+  <link rel="shortcut icon" type="image/x-icon" href="${basePath}/resources/common/favicon.ico" media="screen" />
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${basePath}/resources/common/css/customTable.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+
+  <link rel="stylesheet" href="${basePath}/resources/common/css/base.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="${basePath}/resources/common/libs/html5shiv/html5shiv.min.js"></script>
+  <script src="${basePath}/resources/common/libs/respond/respond.min.js"></script>
+  <!-- bootstrap datepicker -->
+  <![endif]-->
+  <!-- table and edit -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datatables/select.bootstrap.min.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/all.css">
+  <!-- daterangepicker -->
+  <!--<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/daterangepicker/daterangepicker.css">-->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datepicker/datepicker3.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/select2/select2.min.css">
+  <!-- treeview -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/skins/_all-skins.css">
+  <!--弹出层-->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/layui/css/layui.css">
+
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      height: 100%;
+      width: 100%;
+    }
+    #mainDiv{
+      /*height: 0px;*/
+      /*width: 0px;*/
+    }
+    /*#superAdmin > li > ul > li >a {*/
+      /*color: #000;*/
+      /*background-color: red;*/
+      /*z-index: 999;*/
+    /*}*/
+
+    /*a{*/
+      /*color: #000;*/
+      /*background-color: red;*/
+      /*z-index: 999;*/
+    /*}*/
+
+
+  </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini fixed">
+
+<div class="wrapper">
+
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="${basePath}/main" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>吉林省</b>水系展示</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>水系展示与应用系统</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <!-- Navbar Right Menu -->
+
+      <div class="navbar-custom-menu">
+       <ul id="superAdmin" class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="hidden-xs">${user.name}</span>
+            </a>
+            <ul class="dropdown-menu" style="background-color: #3c8dbc; width: 50px;">
+              <!--<li><a href="#" data-url="${basePath}/user/updateInfo" style=" color: #f6f6f6;">个人信息</a></li>-->
+              <!--<li><a href="#" onclick="updatePassword()" style=" color: #f6f6f6;">修改密码</a></li>-->
+              <!--<li><a href="${basePath}/logout"  style=" color: #f6f6f6;">退出</a></li>-->
+              <li><a href="#" data-url="${basePath}/user/updateInfo" style=" color: #000;">个人信息</a></li>
+              <li><a href="#" onclick="updatePassword()" style=" color: #000;">修改密码</a></li>
+              <li><a href="${basePath}/logout"  style=" color: #000;">退出</a></li>
+            </ul>
+          </li>
+          <!--<li>-->
+            <!--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+          <!--</li>-->
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" >
+      <!-- search form -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" id="mainDiv" style="height: 500px;"></div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer text-center">
+    <strong>Copyright &copy; 2018 长光卫星技术有限公司</strong>
+  </footer>
+<!-- E:\wsda2\src\main\webapp\WEB-INF\views\main.html -->
+</div>
+<!-- ./wrapper -->
+<script type="text/javascript">
+    var basePath="${basePath}";//给外部js文件传递路径参数
+</script>
+<!-- jQuery 2.2.0 -->
+<script src="${basePath}/resources/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/jQuery/jquery.validate.min.js"></script>
+<!--JSON2-->
+<script src="${basePath}/resources/common/json/json2.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="${basePath}/resources/adminlte/bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="${basePath}/resources/adminlte/plugins/fastclick/fastclick.js"></script>
+<!--<script src="${basePath}/resources/adminlte/plugins/layer/layer.js"></script>-->
+<script src="${basePath}/resources/adminlte/plugins/layui/layui.all.js"></script>
+<!-- AdminLTE App -->
+<script src="${basePath}/resources/adminlte/dist/js/app.min.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- dataTable -->
+<script src="${basePath}/resources/adminlte/plugins/datatables/jquery.dataTables.js"></script>
+<script	src="${basePath}/resources/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="${basePath}/resources/common/js/dataTables.js"></script>
+<!-- form -->
+<script src="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/js/bootstrap-validator.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/iCheck/icheck.min.js"></script>
+
+<!--daterangepicker-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/daterangepicker/daterangepicker.js"></script>-->
+
+<script src="${basePath}/resources/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="${basePath}/resources/adminlte/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<!-- treeview -->
+<script src="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.js"></script>.
+<!-- AdminLTE for demo purposes -->
+<script src="${basePath}/resources/adminlte/dist/js/demo.js"></script>
+<!--select2-->
+<script src="${basePath}/resources/adminlte/plugins/select2/select2.full.min.js"></script>
+
+<script type="text/javascript" src="${basePath}/resources/common/js/base.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-modal.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-form.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-datasource.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-org.js"></script>
+
+<script src="http://localhost:8080/ArcAPI3.22/init.js"></script>
+
+<!--弹出层-->
+
+<!--<script src="${basePath}/resources/adminlte/plugins/layui/layui.js"></script>-->
+<!-- 加入页面的的脚本 -->
+<script>
+    //加载菜单
+    var menuData;
+    var winId="updatePasswordWin";
+    ajaxPost(basePath+"/function/getlist",null,function(data){
+        var $li,$menu_f_ul,$menu_s,$li_s,$menu_s_ul;
+        menuData=data;
+        $.each(data,function(index,item){
+            if(item.levelcode.length==6){
+                if(hasChildMenu(item.id)){
+                    $li=$('<li class="treeview"></li>');
+                    var $menu_f=$('<a href="#">\n'+
+                        '<i class="'+item.icon+'"></i> <span>'+item.name+'</span>\n'+
+                        ' <span class="pull-right-container">\n'+
+                        '<i class="fa fa-angle-left pull-right"></i>\n'+
+                        '</span></a>');
+                    $li.append($menu_f);
+                    $menu_f_ul=$('<ul class="treeview-menu"></ul>');
+                    $li.append($menu_f_ul);
+                    $("ul.sidebar-menu").append($li);
+                }
+              else{
+                    var $menu_f = $('<li><a href="#" data-url="${basePath}' + item.url + '"><i class="' + item.icon + '"></i>' + item.name + '</a></li>');
+                    $("ul.sidebar-menu").append($menu_f);
+                }
+            }
+            else if(item.levelcode.length==12){
+                if(hasChildMenu(item.id)){
+                    $li_s=$('<li class="treeview"></li>');
+                    $menu_s=$('<a href="#">\n'+
+                        '<i class="'+item.icon+'"></i> <span>'+item.name+'</span>\n'+
+                        ' <span class="pull-right-container">\n'+
+                        '<i class="fa fa-angle-left pull-right"></i>\n'+
+                        '</span></a>');
+                    $li_s.append($menu_s);
+                    $menu_s_ul=$('<ul class="treeview-menu"></ul>');
+                    $li_s.append($menu_s_ul);
+                    $menu_f_ul.append($li_s);
+                }else {
+                    $menu_s = $('<li><a href="#" data-url="${basePath}' + item.url + '"><i class="' + item.icon + '"></i>' + item.name + '</a></li>');
+                    $menu_f_ul.append($menu_s);
+                }
+            }
+            else if(item.levelcode.length==18){
+                $menu_t = $('<li><a href="#" data-url="${basePath}' + item.url + '"><i class="' + item.icon + '"></i>' + item.name + '</a></li>');
+                $menu_s_ul.append($menu_t);
+            }
+        });
+
+    });
+
+    //判断当前二级菜单是否有包含三级菜单
+    function hasChildMenu(parentId){
+        if(!menuData)
+            return false;
+        for(var i=0;i<menuData.length;i++){
+            var item=menuData[i];
+            if(item.pid==parentId){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $(function(){
+        //首页默认加载
+        loadPage("${basePath}/river/river_info");
+        //E:\wsda2\src\main\webapp\WEB-INF\views\base\river_info\riverInfoDisplay.html
+        // loadPage("${basePath}/homePage");
+        //loadPage("${basePath}/user/list");
+        //loadPage("${basePath}/activiti/task/todo/list");
+        //loadPage("${basePath}/activiti/delegate/list");
+        //loadPage("${basePath}/markdown/preview?id=402880e958ecdff60158ed0c62ba0001")
+        $("a[data-url]").click(function(evt){
+            loadPage($(this).data("url"));
+            $("ul.treeview-menu li").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    });
+
+    var userId = "${user.id}"
+    function updatePassword() {
+        modals.openWin({
+            winId:winId,
+            title:'修改密码',
+            width:'700px',
+            url:basePath+"/user/updatePassword?id="+userId,
+        });
+    }
+</script>
+</body>
+
+</html>
